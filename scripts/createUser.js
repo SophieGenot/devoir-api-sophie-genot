@@ -1,25 +1,23 @@
 require('dotenv').config({ path: 'env/.env.dev' });
-const mongoose = require('mongoose');
-const User = require('../models/User'); // modèle sécurisé
-
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connecté'))
-  .catch(err => console.error(err));
+const User = require('../models/User');
+const connectDB = require('../config/db');
 
 async function createUser() {
   try {
+    await connectDB();
+
     const user = new User({
       username: 'Sophie',
       email: 'sophie@test.com',
-      password: 'test123'
+      password: 'test123' // 🔴 EN CLAIR
     });
 
     await user.save();
-    console.log('Utilisateur créé !');
+    console.log('Utilisateur créé avec succès');
+    process.exit();
   } catch (err) {
-    console.error('Erreur création utilisateur :', err.message);
-  } finally {
-    mongoose.disconnect();
+    console.error('Erreur création utilisateur :', err);
+    process.exit(1);
   }
 }
 

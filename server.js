@@ -1,3 +1,6 @@
+const session = require('express-session');
+const MongoStore = require('connect-mongo').default;
+
 // Chargement variables d’environnement
 const envFile =
   process.env.NODE_ENV === 'production'
@@ -21,17 +24,23 @@ const PORT = process.env.PORT || 3000;
 // Connexion MongoDB
 connectDB();
 
+// Configuration session
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'secret', // clé secrète
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+    cookie: { maxAge: 1000 * 60 * 60 * 2 } // 2h
+  })
+);
+
 // Config moteur EJS
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-// Pour parser les formulaires POST
+// parser formulaires POST
 app.use(express.urlencoded({ extended: true }));
-
-// Route d’accueil simple pour test
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
 
 // Route GET /login pour afficher le formulaire
 app.get('/login', (req, res) => {
@@ -49,10 +58,27 @@ app.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.send('Email ou mot de passe incorrect');
 
+    // Enregistrer l'utilisateur dans la session
+    req.session.userId = user._id;
+    req.session.username = user.username;
+
+  console.log('Session:', req.session);
+
     res.send(`Bienvenue ${user.username} !`);
   } catch (err) {
     res.status(500).send('Erreur serveur');
   }
+});
+
+app.get('/dashboard', (req, res) => {
+  if (!req.session.userId) {
+    return res.send('Vous devez être connecté');
+  }
+  res.send(`Bonjour ${req.session.username}, bienvenue sur le tableau de bord !`);
+});
+
+app.get('/', (req, res) => {
+  res.send('Hello World');
 });
 
 // Lancement du serveur
