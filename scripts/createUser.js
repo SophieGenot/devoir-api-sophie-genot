@@ -1,33 +1,24 @@
 require('dotenv').config({ path: 'env/.env.dev' });
-const mongoose = require('mongoose');
+const User = require('../models/User');
+const connectDB = require('../config/db');
 
-// Connexion à la base
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connecté'))
-  .catch(err => console.error(err));
+async function createUser() {
+  try {
+    await connectDB();
 
-// Modèle User
-const userSchema = new mongoose.Schema({
-  username: String,
-  email: { type: String, unique: true },
-  password: String
-});
+    const user = new User({
+      username: 'Sophie',
+      email: 'sophie@test.com',
+      password: 'test123' // 🔴 EN CLAIR
+    });
 
-const User = mongoose.model('User', userSchema);
-
-// Crée un utilisateur test
-const user = new User({
-  username: 'Sophie',
-  email: 'sophie@test.com',
-  password: 'test123' // plus tard on fera le hash
-});
-
-user.save()
-  .then(() => {
-    console.log('Utilisateur créé !');
-    mongoose.disconnect();
-  })
-  .catch(err => {
+    await user.save();
+    console.log('Utilisateur créé avec succès');
+    process.exit();
+  } catch (err) {
     console.error('Erreur création utilisateur :', err);
-    mongoose.disconnect();
-  });
+    process.exit(1);
+  }
+}
+
+createUser();
