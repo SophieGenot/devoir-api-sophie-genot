@@ -9,11 +9,14 @@ const reservationSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+<<<<<<< HEAD
   clientEmail: {
     type: String,
     required: true,
     lowercase: true
   },
+=======
+>>>>>>> cfd1731 (catways-reservations routes)
   boatName: {
     type: String,
     required: true

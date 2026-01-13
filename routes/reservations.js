@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 const Reservation = require('../models/Reservation');
 
+<<<<<<< HEAD
 // liste réservations
+=======
+// GET toutes les réservations
+>>>>>>> cfd1731 (catways-reservations routes)
 router.get('/', async (req, res) => {
   try {
     const reservations = await Reservation.find();
@@ -12,6 +16,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 // formulaire pour créer nouvelle réservation
 router.get('/new', (req, res) => {
   res.render('newReservation');
@@ -70,6 +75,9 @@ router.post('/:id/edit', async (req, res) => {
 });
 
 // détails réservation 
+=======
+// GET une réservation par ID MongoDB
+>>>>>>> cfd1731 (catways-reservations routes)
 router.get('/:id', async (req, res) => {
   try {
     const reservation = await Reservation.findById(req.params.id);
@@ -80,6 +88,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 // suppr réservation par ID
 router.post('/:id/delete', async (req, res) => {
   try {
@@ -91,5 +100,48 @@ router.post('/:id/delete', async (req, res) => {
   }
 });
 
+=======
+// POST créer une réservation
+router.post('/', async (req, res) => {
+  const { catwayNumber, clientName, boatName, startDate, endDate } = req.body;
+
+  const reservation = new Reservation({
+    catwayNumber,
+    clientName,
+    boatName,
+    startDate,
+    endDate
+  });
+
+  try {
+    const newReservation = await reservation.save();
+    res.status(201).json(newReservation);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// PUT modifier une réservation par ID
+router.put('/:id', async (req, res) => {
+  try {
+    const reservation = await Reservation.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!reservation) return res.status(404).json({ message: 'Réservation non trouvée' });
+    res.json(reservation);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// DELETE une réservation par ID
+router.delete('/:id', async (req, res) => {
+  try {
+    const reservation = await Reservation.findByIdAndDelete(req.params.id);
+    if (!reservation) return res.status(404).json({ message: 'Réservation supprimée' });
+    res.json({ message: 'Réservation supprimée' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+>>>>>>> cfd1731 (catways-reservations routes)
 
 module.exports = router;
