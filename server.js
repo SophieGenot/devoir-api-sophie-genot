@@ -81,6 +81,12 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
+const catwaysRoute = require('./routes/catways');
+const reservationsRoute = require('./routes/reservations');
+
+app.use('/catways', catwaysRoute);
+app.use('/reservations', reservationsRoute); 
+
 // Lancement du serveur
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur le port ${PORT}`);
