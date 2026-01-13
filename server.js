@@ -82,10 +82,30 @@ app.get('/', (req, res) => {
 });
 
 const catwaysRoute = require('./routes/catways');
-const reservationsRoute = require('./routes/reservations');
+const Catway = require('./models/Catways');
 
-app.use('/catways', catwaysRoute);
-app.use('/reservations', reservationsRoute); 
+const reservationsRoute = require('./routes/reservations');
+const Reservation = require('./models/Reservation');
+
+
+
+app.get('/catways', async (req, res) => {
+  try {
+    const catways = await Catway.find().sort({ catwayNumber: 1 }); // Tri par numéro
+    res.render('catways', { catways }); // On envoie les données à la vue EJS
+  } catch (err) {
+    res.status(500).send('Erreur serveur');
+  }
+});
+
+app.get('/reservations', async (req, res) => {
+  try {
+    const reservations = await Reservation.find().sort({ startDate: 1 }); // tri par date
+    res.render('reservations', { reservations });
+  } catch (err) {
+    res.status(500).send('Erreur serveur');
+  }
+});
 
 // Lancement du serveur
 app.listen(PORT, () => {
