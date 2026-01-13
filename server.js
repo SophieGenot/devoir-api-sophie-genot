@@ -1,4 +1,4 @@
-const session = require('express-session');
+const session = require('express-session'); 
 const MongoStore = require('connect-mongo').default;
 const express = require('express');
 require('dotenv').config({
@@ -40,7 +40,6 @@ app.use('/dashboard', require('./routes/dashboard.routes'));
 app.use('/catways', require('./routes/catways'));
 app.use('/reservations', require('./routes/reservations'));
 app.use(express.static('public'));
-
 
 // Home
 app.get('/', (req, res) => {
