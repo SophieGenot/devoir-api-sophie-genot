@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Reservation = require('../models/Reservation');
 
-// GET toutes les réservations
+// liste réservations
 router.get('/', async (req, res) => {
   try {
     const reservations = await Reservation.find();
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET une réservation par ID MongoDB
+// détails réservation 
 router.get('/:id', async (req, res) => {
   try {
     const reservation = await Reservation.findById(req.params.id);
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST créer une réservation
+// créer réservation
 router.post('/', async (req, res) => {
   const { catwayNumber, clientName, boatName, startDate, endDate } = req.body;
 
@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT modifier une réservation par ID
+// modifier réservation 
 router.put('/:id', async (req, res) => {
   try {
     const reservation = await Reservation.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -54,7 +54,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE une réservation par ID
+// suppr réservation 
 router.delete('/:id', async (req, res) => {
   try {
     const reservation = await Reservation.findByIdAndDelete(req.params.id);

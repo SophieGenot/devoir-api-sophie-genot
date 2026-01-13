@@ -39,10 +39,10 @@ app.use(
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-// parser formulaires POST
+// parser formulaires 
 app.use(express.urlencoded({ extended: true }));
 
-// Route GET /login pour afficher le formulaire
+// affichage formulaire
 app.get('/login', (req, res) => {
   res.render('login');
 });
@@ -58,7 +58,7 @@ app.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.send('Email ou mot de passe incorrect');
 
-    // Enregistrer l'utilisateur dans la session
+    // Enregistrer utilisateur session
     req.session.userId = user._id;
     req.session.username = user.username;
 
@@ -70,12 +70,27 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.get('/dashboard', (req, res) => {
+// Dashboard pour utilisateur connecté
+app.get('/dashboard', async (req, res) => {
   if (!req.session.userId) {
-    return res.send('Vous devez être connecté');
+    return res.redirect('/login'); // redirige vers login si pas connecté
   }
-  res.send(`Bonjour ${req.session.username}, bienvenue sur le tableau de bord !`);
+
+  try {
+    const catways = await Catway.find().sort({ catwayNumber: 1 });
+    const reservations = await Reservation.find().sort({ startDate: 1 });
+
+    res.render('dashboard', {
+      username: req.session.username,
+      catways,
+      reservations
+    });  
+  } catch (err) {
+    console.error('Erreur dashboard:', err);
+    res.status(500).send('Erreur serveur');
+  }
 });
+
 
 app.get('/', (req, res) => {
   res.send('Hello World');

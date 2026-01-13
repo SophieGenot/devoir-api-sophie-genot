@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Catway = require('../models/Catways'); // modèle Mongoose Catways
-const Reservation = require('../models/Reservation'); // modèle Mongoose Reservations
+const Catway = require('../models/Catways'); 
+const Reservation = require('../models/Reservation'); 
 
-// GET /catways - liste tous les catways
+// liste catways
 router.get('/', async (req, res) => {
   try {
     const catways = await Catway.find();
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /catways/:id - détails d'un catway
+// détails catway
 router.get('/:id', async (req, res) => {
   try {
     const catway = await Catway.findOne({ catwayNumber: req.params.id });
@@ -24,7 +24,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST /catways - créer un catway
+// créer catway
 router.post('/', async (req, res) => {
   const catway = new Catway(req.body);
   try {
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT /catways/:id - modifier l'état d'un catway
+// modifier état catway
 router.put('/:id', async (req, res) => {
   try {
     const catway = await Catway.findOne({ catwayNumber: req.params.id });
@@ -49,7 +49,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE /catways/:id - supprimer un catway
+// suppr catway
 router.delete('/:id', async (req, res) => {
   try {
     const catway = await Catway.findOneAndDelete({ catwayNumber: req.params.id });

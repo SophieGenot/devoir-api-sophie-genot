@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Port de Russell</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+    th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+    th { background-color: #eee; }
+    h2 { margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>Bonjour <%= username %>, bienvenue sur le tableau de bord !</h1>
+
+  <h2>Catways</h2>
+  <table>
+    <tr>
+      <th>Numéro</th>
+      <th>Type</th>
+      <th>Etat</th>
+      <th>Actions</th>
+    </tr>
+    <% catways.forEach(c => { %>
+      <tr>
+        <td><%= c.catwayNumber %></td>
+        <td><%= c.catwayType %></td>
+        <td><%= c.catwayState %></td>
+        <td>
+          <!-- Les boutons CRUD seront fonctionnels plus tard -->
+          <button>Modifier</button>
+          <button>Supprimer</button>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+
+  <h2>Réservations</h2>
+  <table>
+    <tr>
+      <th>Catway</th>
+      <th>Client</th>
+      <th>Bateau</th>
+      <th>Début</th>
+      <th>Fin</th>
+      <th>Actions</th>
+    </tr>
+    <% reservations.forEach(r => { %>
+      <tr>
+        <td><%= r.catwayNumber %></td>
+        <td><%= r.clientName %></td>
+        <td><%= r.boatName %></td>
+        <td><%= r.startDate.toISOString().split('T')[0] %></td>
+        <td><%= r.endDate.toISOString().split('T')[0] %></td>
+        <td>
+          <!-- Les boutons CRUD seront fonctionnels plus tard -->
+          <button>Modifier</button>
+          <button>Supprimer</button>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>
+
