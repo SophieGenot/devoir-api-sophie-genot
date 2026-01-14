@@ -13,32 +13,34 @@ router.get('/', async (req, res) => {
   }
 });
 
-// détails catway
-router.get('/:id', async (req, res) => {
-  try {
-    const catway = await Catway.findOne({ catwayNumber: req.params.id });
-    if (!catway) return res.status(404).json({ message: 'Catway non trouvé' });
-    res.json(catway);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// formulaire pour créer nouveau catway
+router.get('/new', (req, res) => {
+  res.render('newCatway');
 });
 
-// créer catway
-router.post('/', async (req, res) => {
-  const catway = new Catway(req.body);
+// Enregistrer nouveau catway
+router.post('/new', async (req, res) => {
+  const { catwayNumber, catwayType, catwayState } = req.body;
+
+  const reservation = new Catway({
+    catwayNumber,
+    catwayType,
+    catwayState
+  });
+
   try {
-    await catway.save();
-    res.status(201).json(catway);
+    await Catway.save();
+    res.redirect('/dashboard'); // retour au dashboard après création
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    console.error('Erreur création catway:', err);
+    res.status(400).send('Impossible de créer le catway');
   }
 });
 
 // Formulaire de modification
 router.get('/:id/edit', async (req, res) => {
   try {
-    const catway = await Catway.findById(req.params.id); // <-- utiliser Catway et pas catway
+    const catway = await Catway.findById(req.params.id); 
     if (!catway) return res.status(404).send('Catway non trouvée');
     res.render('editCatways', { catway });
   } catch (err) {
@@ -48,7 +50,7 @@ router.get('/:id/edit', async (req, res) => {
 });
 
 router.post('/:id/edit', async (req, res) => {
-  const { catwayType, catwayState } = req.body; // ne pas modifier catwayNumber
+  const { catwayType, catwayState } = req.body; 
   try {
     await Catway.findByIdAndUpdate(req.params.id, {
       catwayType,
@@ -61,9 +63,21 @@ router.post('/:id/edit', async (req, res) => {
   }
 });
 
+// détails catway
+router.get('/:id', async (req, res) => {
+  try {
+    const catway = await Catway.findOne({ catwayNumber: req.params.id });
+    if (!catway) return res.status(404).json({ message: 'Catway non trouvé' });
+    res.json(catway);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+//suppr catway
 router.post('/:id/delete', async (req, res) => {
   try {
-    await Catway.findByIdAndDelete(req.params.id); // <-- utiliser Catway
+    await Catway.findByIdAndDelete(req.params.id);
     res.redirect('/dashboard'); 
   } catch (err) {
     console.error(err);

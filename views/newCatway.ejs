@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un catway</title>
+</head>
+<body>
+  <h2>Créer une nouveau catway</h2>
+
+  <form action="/catways/new" method="POST">
+    <label>Numéro du catway :</label>
+    <input type="number" name="catwayNumber" required>
+
+    <label>Type de catway :</label>
+    <input type="text" name="clientName" required>
+
+    <label>État du catway:</label>
+    <input type="email" name="clientEmail" required>
+
+    <button type="submit">Créer</button>
+  </form>
+</body>
+</html>

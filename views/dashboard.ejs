@@ -29,8 +29,13 @@
         <td><%= c.catwayNumber %></td>
         <td><%= c.catwayType %></td>
         <td><%= c.catwayState %></td>
-        <td>               
-          <a href="/catways/<%= c._id %>/edit">Modifier</a>
+        <td>    
+          <form action="/catways/new" method="get" style="display:inline;">
+                  <button type="submit">Créer un nouveau catway</button>
+                </form>
+          <form action="/catways/<%= c._id %>/edit" method="POST" style="display:inline;">
+            <button type="submit">Modifier</button>
+          </form>           
           <form action="/catways/<%= c._id %>/delete" method="POST" style="display:inline;">
             <button type="submit">Supprimer</button>
           </form>
@@ -61,7 +66,12 @@
             <td><%= reservation.startDate.toISOString().slice(0, 10) %></td>
             <td><%= reservation.endDate.toISOString().slice(0, 10) %></td>
             <td>
-                <a href="/reservations/<%= reservation._id %>/edit">Modifier</a>
+                <form action="/reservations/new" method="get" style="display:inline;">
+                  <button type="submit">Créer une nouvelle réservation</button>
+                </form>
+                <form action="/reservations/<%= reservation._id %>/edit" method="get" style="display:inline;">
+                  <button type="submit">Modifier</button>
+                </form>
                 <form action="/reservations/<%= reservation._id %>/delete" method="POST" style="display:inline;">
                   <button type="submit">Supprimer</button>
                 </form>

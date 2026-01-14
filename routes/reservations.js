@@ -12,35 +12,30 @@ router.get('/', async (req, res) => {
   }
 });
 
-// détails réservation 
-router.get('/:id', async (req, res) => {
-  try {
-    const reservation = await Reservation.findById(req.params.id);
-    if (!reservation) return res.status(404).json({ message: 'Réservation non trouvée' });
-    res.json(reservation);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// formulaire pour créer nouvelle réservation
+router.get('/new', (req, res) => {
+  res.render('newReservation');
 });
 
-// créer réservation
-router.post('/', async (req, res) => {
-  const { catwayNumber, clientName, boatName, startDate, endDate } = req.body;
+// Enregistrer nouvelle réservation
+router.post('/new', async (req, res) => {
+  const { catwayNumber, clientName, clientEmail, boatName, startDate, endDate } = req.body;
 
   const reservation = new Reservation({
     catwayNumber,
-    clientEmail,
     clientName,
+    clientEmail,
     boatName,
     startDate,
     endDate
   });
 
   try {
-    const newReservation = await reservation.save();
-    res.status(201).json(newReservation);
+    await reservation.save();
+    res.redirect('/dashboard'); // retour au dashboard après création
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    console.error('Erreur création réservation:', err);
+    res.status(400).send('Impossible de créer la réservation');
   }
 });
 
@@ -71,6 +66,17 @@ router.post('/:id/edit', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send('Erreur serveur');
+  }
+});
+
+// détails réservation 
+router.get('/:id', async (req, res) => {
+  try {
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation) return res.status(404).json({ message: 'Réservation non trouvée' });
+    res.json(reservation);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
