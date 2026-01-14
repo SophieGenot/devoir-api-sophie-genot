@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modification d'une réservation</title>
+</head>
+<body>
+    <h2>Modifier une réservation</h2>
+<form action="/reservations/<%= reservation._id %>/edit" method="POST">
+  <label>Catway Number:</label>
+  <input type="number" name="catwayNumber" value="<%= reservation.catwayNumber %>" required>
+  
+  <label>Client Name:</label>
+  <input type="text" name="clientName" value="<%= reservation.clientName %>" required>
+  
+  <label>Boat Name:</label>
+  <input type="text" name="boatName" value="<%= reservation.boatName %>" required>
+  
+  <label>Start Date:</label>
+  <input type="date" name="startDate" value="<%= reservation.startDate.toISOString().slice(0,10) %>" required>
+  
+  <label>End Date:</label>
+  <input type="date" name="endDate" value="<%= reservation.endDate.toISOString().slice(0,10) %>" required>
+
+  <button type="submit">Enregistrer</button>
+</form>
+
+</body>
+</html>

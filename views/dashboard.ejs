@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard - Port de Russell</title>
+  <title>Tableau de bord du Port de Russell</title>
   <style>
     table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
     th, td { border: 1px solid #333; padding: 8px; text-align: left; }
@@ -15,51 +15,63 @@
 
   <h2>Catways</h2>
   <table>
-    <tr>
+    <thead>
+       <tr>
       <th>Numéro</th>
       <th>Type</th>
       <th>Etat</th>
       <th>Actions</th>
     </tr>
-    <% catways.forEach(c => { %>
+    </thead>
+   <tbody>
+     <% catways.forEach(c => { %>
       <tr>
         <td><%= c.catwayNumber %></td>
         <td><%= c.catwayType %></td>
         <td><%= c.catwayState %></td>
-        <td>
-          <!-- Les boutons CRUD seront fonctionnels plus tard -->
-          <button>Modifier</button>
-          <button>Supprimer</button>
+        <td>               
+          <a href="/catways/<%= c._id %>/edit">Modifier</a>
+          <form action="/catways/<%= c._id %>/delete" method="POST" style="display:inline;">
+            <button type="submit">Supprimer</button>
+          </form>
         </td>
-      </tr>
-    <% }) %>
+         </tr>
+        <% }) %>
+   </tbody>
   </table>
 
-  <h2>Réservations</h2>
-  <table>
-    <tr>
-      <th>Catway</th>
-      <th>Client</th>
-      <th>Bateau</th>
-      <th>Début</th>
-      <th>Fin</th>
-      <th>Actions</th>
-    </tr>
-    <% reservations.forEach(r => { %>
-      <tr>
-        <td><%= r.catwayNumber %></td>
-        <td><%= r.clientName %></td>
-        <td><%= r.boatName %></td>
-        <td><%= r.startDate.toISOString().split('T')[0] %></td>
-        <td><%= r.endDate.toISOString().split('T')[0] %></td>
-        <td>
-          <!-- Les boutons CRUD seront fonctionnels plus tard -->
-          <button>Modifier</button>
-          <button>Supprimer</button>
-        </td>
-      </tr>
-    <% }) %>
-  </table>
+<h2>Mes réservations</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Catway</th>
+            <th>Client</th>
+            <th>Bateau</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% reservations.forEach(reservation => { %>
+        <tr>
+            <td><%= reservation.catwayNumber %></td>
+            <td><%= reservation.clientName %></td>
+            <td><%= reservation.boatName %></td>
+            <td><%= reservation.startDate.toISOString().slice(0, 10) %></td>
+            <td><%= reservation.endDate.toISOString().slice(0, 10) %></td>
+            <td>
+                <a href="/reservations/<%= reservation._id %>/edit">Modifier</a>
+                <form action="/reservations/<%= reservation._id %>/delete" method="POST" style="display:inline;">
+                  <button type="submit">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+ 
 </body>
 </html>
 
