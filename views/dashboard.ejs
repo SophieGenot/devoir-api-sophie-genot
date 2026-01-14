@@ -2,48 +2,12 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/style.css">
   <title>Tableau de bord du Port de Russell</title>
-  <style>
-    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
-    th, td { border: 1px solid #333; padding: 8px; text-align: left; }
-    th { background-color: #eee; }
-    h2 { margin-top: 30px; }
-  </style>
 </head>
+
 <body>
   <h1>Bonjour <%= username %>, bienvenue sur le tableau de bord !</h1>
-
-  <h2>Catways</h2>
-  <table>
-    <thead>
-       <tr>
-      <th>Numéro</th>
-      <th>Type</th>
-      <th>Etat</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-   <tbody>
-     <% catways.forEach(c => { %>
-      <tr>
-        <td><%= c.catwayNumber %></td>
-        <td><%= c.catwayType %></td>
-        <td><%= c.catwayState %></td>
-        <td>    
-          <form action="/catways/new" method="get" style="display:inline;">
-                  <button type="submit">Créer un nouveau catway</button>
-                </form>
-          <form action="/catways/<%= c._id %>/edit" method="POST" style="display:inline;">
-            <button type="submit">Modifier</button>
-          </form>           
-          <form action="/catways/<%= c._id %>/delete" method="POST" style="display:inline;">
-            <button type="submit">Supprimer</button>
-          </form>
-        </td>
-         </tr>
-        <% }) %>
-   </tbody>
-  </table>
 
 <h2>Mes réservations</h2>
 <table>
@@ -66,20 +30,57 @@
             <td><%= reservation.startDate.toISOString().slice(0, 10) %></td>
             <td><%= reservation.endDate.toISOString().slice(0, 10) %></td>
             <td>
-                <form action="/reservations/new" method="get" style="display:inline;">
-                  <button type="submit">Créer une nouvelle réservation</button>
-                </form>
-                <form action="/reservations/<%= reservation._id %>/edit" method="get" style="display:inline;">
-                  <button type="submit">Modifier</button>
-                </form>
-                <form action="/reservations/<%= reservation._id %>/delete" method="POST" style="display:inline;">
-                  <button type="submit">Supprimer</button>
-                </form>
+              <a href="/reservations/<%= reservation._id %>/edit">
+                <button type="button">Modifier</button>
+              </a>
+                
+              <form action="/reservations/<%= reservation._id %>/delete" method="POST" style="display:inline;">
+                <button type="submit">Supprimer</button>
+              </form>
+
+              <a href="/reservations/new">
+                <button type="button">Créer une nouvelle réservation</button>
+              </a>   
             </td>
         </tr>
         <% }) %>
     </tbody>
 </table>
+
+  <h2>Catways</h2>
+  <table>
+    <thead>
+       <tr>
+      <th>Numéro</th>
+      <th>Type</th>
+      <th>Etat</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+   <tbody>
+     <% catways.forEach(c => { %>
+      <tr>
+        <td><%= c.catwayNumber %></td>
+        <td><%= c.catwayType %></td>
+        <td><%= c.catwayState %></td>
+        <td>   
+          <a href="/catways/<%= c._id %>/edit">
+            <button type="button">Modifier</button>
+          </a>
+
+          <form action="/catways/<%= c._id %>/delete" method="POST" style="display:inline;">
+            <button type="submit">Supprimer</button>
+          </form>
+
+          <a href="/catways/new">
+            <button type="button">Créer un nouveau catway</button>
+          </a>
+        </td>
+      </tr>
+    <% }) %>
+   </tbody>
+  </table>
+
 
  
 </body>

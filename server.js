@@ -39,6 +39,8 @@ app.use('/', require('./routes/auth.routes'));
 app.use('/dashboard', require('./routes/dashboard.routes'));
 app.use('/catways', require('./routes/catways'));
 app.use('/reservations', require('./routes/reservations'));
+app.use(express.static('public'));
+
 
 // Home
 app.get('/', (req, res) => {

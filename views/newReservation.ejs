@@ -3,30 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <title>Créer une réservation</title>
+
+  <!-- Feuille de style commune -->
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <h2>Créer une nouvelle réservation</h2>
+
+  <h1>Créer une nouvelle réservation</h1>
 
   <form action="/reservations/new" method="POST">
-    <label>Numéro du catway :</label>
-    <input type="number" name="catwayNumber" required>
+    <table>
+      <tbody>
+        <tr>
+          <th>Numéro du catway</th>
+          <td>
+            <input type="number" name="catwayNumber" required>
+          </td>
+        </tr>
 
-    <label>Nom du client :</label>
-    <input type="text" name="clientName" required>
+        <tr>
+          <th>Nom du client</th>
+          <td>
+            <input type="text" name="clientName" required>
+          </td>
+        </tr>
 
-    <label>Email du client :</label>
-    <input type="email" name="clientEmail" required>
+        <tr>
+          <th>Email du client</th>
+          <td>
+            <input type="email" name="clientEmail" required>
+          </td>
+        </tr>
 
-    <label>Nom du bateau :</label>
-    <input type="text" name="boatName" required>
+        <tr>
+          <th>Nom du bateau</th>
+          <td>
+            <input type="text" name="boatName" required>
+          </td>
+        </tr>
 
-    <label>Date de début :</label>
-    <input type="date" name="startDate" required>
+        <tr>
+          <th>Date de début</th>
+          <td>
+            <input type="date" name="startDate" required>
+          </td>
+        </tr>
 
-    <label>Date de fin :</label>
-    <input type="date" name="endDate" required>
+        <tr>
+          <th>Date de fin</th>
+          <td>
+            <input type="date" name="endDate" required>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-    <button type="submit">Créer</button>
+    <button type="submit">Créer la réservation</button>
+    <a href="/dashboard">
+      <button type="button">Annuler</button>
+    </a>
   </form>
+
 </body>
 </html>

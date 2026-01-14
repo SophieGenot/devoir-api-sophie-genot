@@ -1,27 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modification d'un catway</title>
+  <meta charset="UTF-8">
+  <title>Modifier un catway</title>
+
+  <!-- Feuille de style commune -->
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h2>Modifier un catway</h2>
 
-    <form action="/catways/<%= catway._id %>/edit" method="POST">
-        <label>Numéro du catway:</label>
-        <input type="number" name="catwayNumber" value="<%= catway.catwayNumber %>" readonly>
+  <h1>Modification d'un catway</h1>
 
-        <label>Type de catway:</label>
-        <select name="catwayType" required>
-            <option value="short" <%= catway.catwayType === 'short' ? 'selected' : '' %>>Short</option>
-            <option value="long" <%= catway.catwayType === 'long' ? 'selected' : '' %>>Long</option>
-        </select>
+  <form action="/catways/<%= catway._id %>/edit" method="POST">
+    <table>
+      <tbody>
+        <tr>
+          <th>Numéro du catway</th>
+          <td>
+            <input
+              type="number"
+              name="catwayNumber"
+              value="<%= catway.catwayNumber %>"
+              readonly
+            >
+          </td>
+        </tr>
 
-        <label>État du catway:</label>
-        <input type="text" name="catwayState" value="<%= catway.catwayState %>" required>
+        <tr>
+          <th>Type de catway</th>
+          <td>
+            <select name="catwayType" required>
+              <option value="short" <%= catway.catwayType === 'short' ? 'selected' : '' %>>
+                Short
+              </option>
+              <option value="long" <%= catway.catwayType === 'long' ? 'selected' : '' %>>
+                Long
+              </option>
+            </select>
+          </td>
+        </tr>
 
-        <button type="submit">Enregistrer</button>
-    </form>
+        <tr>
+          <th>État du catway</th>
+          <td>
+            <input
+              type="text"
+              name="catwayState"
+              value="<%= catway.catwayState %>"
+              required
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button type="submit"> Enregistrer</button>
+    <a href="/dashboard">
+      <button type="button"> Annuler</button>
+    </a>
+  </form>
+
 </body>
 </html>

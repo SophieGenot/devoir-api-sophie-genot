@@ -3,21 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <title>Créer un catway</title>
+
+  <!-- Feuille de style commune -->
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <h2>Créer une nouveau catway</h2>
+
+  <h1>Créer un nouveau catway</h1>
 
   <form action="/catways/new" method="POST">
-    <label>Numéro du catway :</label>
-    <input type="number" name="catwayNumber" required>
+    <table>
+      <tbody>
+        <tr>
+          <th>Numéro du catway</th>
+          <td>
+            <input type="number" name="catwayNumber" required>
+          </td>
+        </tr>
 
-    <label>Type de catway :</label>
-    <input type="text" name="clientName" required>
+        <tr>
+          <th>Type de catway</th>
+          <td>
+            <select name="catwayType" required>
+              <option value="">-- Sélectionner --</option>
+              <option value="short">Short</option>
+              <option value="long">Long</option>
+            </select>
+          </td>
+        </tr>
 
-    <label>État du catway:</label>
-    <input type="email" name="clientEmail" required>
+        <tr>
+          <th>État du catway</th>
+          <td>
+            <input type="text" name="catwayState" required>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-    <button type="submit">Créer</button>
+    <button type="submit">Créer le catway</button>
+    <a href="/dashboard">
+      <button type="button">Annuler</button>
+    </a>
   </form>
+
 </body>
 </html>
