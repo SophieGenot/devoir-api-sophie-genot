@@ -61,36 +61,38 @@ app.post('/login', async (req, res) => {
     // Enregistrer utilisateur session
     req.session.userId = user._id;
     req.session.username = user.username;
+    req.session.email = user.email; 
 
   console.log('Session:', req.session);
 
-    res.send(`Bienvenue ${user.username} !`);
+res.redirect('/dashboard'); // redirection automatique vers le tableau de bord
+
   } catch (err) {
     res.status(500).send('Erreur serveur');
   }
 });
 
-// Dashboard pour utilisateur connecté
 app.get('/dashboard', async (req, res) => {
   if (!req.session.userId) {
-    return res.redirect('/login'); // redirige vers login si pas connecté
+    return res.redirect('/login');
   }
 
   try {
     const catways = await Catway.find().sort({ catwayNumber: 1 });
-    const reservations = await Reservation.find().sort({ startDate: 1 });
+
+    // Récupérer uniquement les réservations de l'utilisateur connecté
+    const reservations = await Reservation.find({ clientEmail: req.session.email }).sort({ startDate: 1 });
 
     res.render('dashboard', {
       username: req.session.username,
       catways,
       reservations
-    });  
+    });
   } catch (err) {
     console.error('Erreur dashboard:', err);
     res.status(500).send('Erreur serveur');
   }
 });
-
 
 app.get('/', (req, res) => {
   res.send('Hello World');

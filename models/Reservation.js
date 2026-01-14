@@ -9,6 +9,11 @@ const reservationSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  clientEmail: {
+    type: String,
+    required: true,
+    lowercase: true
+  },
   boatName: {
     type: String,
     required: true

@@ -1,27 +1,31 @@
 [{
         "catwayNumber": 1,
-        "clientName": "Thomas Martin",
-        "boatName": "Carolina",
-        "startDate": "2024-05-21T06:00:00Z",
-        "endDate": "2024-10-27T06:00:00Z"
+        "clientName": "Sophie G",
+        "clientEmail": "sophie@test.com",
+        "boatName": "La murène",
+        "startDate": "2026-05-21T06:00:00Z",
+        "endDate": "2026-05-27T06:00:00Z"
     },
     {
         "catwayNumber": 2,
-        "clientName": "John Doe",
-        "boatName": "Groeland",
-        "startDate": "2024-05-18T06:00:00Z",
-        "endDate": "2024-11-30T06:00:00Z"
+        "clientName": "Sophie G",
+        "clientEmail": "sophie@test.com",
+        "boatName": "La pastenague",
+        "startDate": "2026-07-18T06:00:00Z",
+        "endDate": "2026-07-30T06:00:00Z"
     },
     {
         "catwayNumber": 3,
-        "clientName": "Margareth Wurtz",
-        "boatName": "Sirène",
+        "clientName": "Arielle Dombasle",
+        "clientEmail": "arielle@test.com",
+        "boatName": "Arielle",
         "startDate": "2024-06-20T06:00:00Z",
         "endDate": "2024-08-27T06:00:00Z"
     },
     {
         "catwayNumber": 7,
         "clientName": "Ralph Laurent",
+        "clientEmail": "ralph@test.com",
         "boatName": "Surcouf",
         "startDate": "2024-07-01T06:00:00Z",
         "endDate": "2024-10-13T06:00:00Z"
@@ -29,6 +33,7 @@
     {
         "catwayNumber": 11,
         "clientName": "Jack Sparrow",
+        "clientEmail": "jack@test.com",
         "boatName": "Black perl",
         "startDate": "2024-08-13T06:00:00Z",
         "endDate": "2024-09-13T06:00:00Z"
@@ -36,6 +41,7 @@
     {
         "catwayNumber": 13,
         "clientName": "Jacky Snow",
+        "clientEmail": "jacky@test.com",
         "boatName": "Léandra",
         "startDate": "2024-09-18T06:00:00Z",
         "endDate": "2024-12-23T06:00:00Z"

@@ -29,6 +29,7 @@ router.post('/', async (req, res) => {
 
   const reservation = new Reservation({
     catwayNumber,
+    clientEmail,
     clientName,
     boatName,
     startDate,
