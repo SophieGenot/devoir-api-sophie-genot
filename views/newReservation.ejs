@@ -4,12 +4,22 @@
   <meta charset="UTF-8">
   <title>Créer une réservation</title>
 
-  <!-- Feuille de style commune -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
 
-  <h1>Créer une nouvelle réservation</h1>
+<body>
+ <header class="header-hero">
+    <div class="header-overlay">
+      <h1>Port de Russell</h1>
+      <p>Bienvenue sur la page du port de Russell</p>
+    </div>
+  </header>
+
+  <main>
+    <section></section>
+  </main>
+  <section>
+     <h1>Créer une nouvelle réservation</h1>
 
   <form action="/reservations/new" method="POST">
     <table>
@@ -20,36 +30,46 @@
             <input type="number" name="catwayNumber" required>
           </td>
         </tr>
-
-        <tr>
+  </section>
+ 
+  <section>
+    <tr>
           <th>Nom du client</th>
           <td>
             <input type="text" name="clientName" required>
           </td>
         </tr>
-
-        <tr>
+  </section>
+        
+  <section>
+    <tr>
           <th>Email du client</th>
           <td>
             <input type="email" name="clientEmail" required>
           </td>
         </tr>
-
-        <tr>
+  </section>
+        
+  <section>
+    <tr>
           <th>Nom du bateau</th>
           <td>
             <input type="text" name="boatName" required>
           </td>
         </tr>
-
-        <tr>
+  </section>
+        
+  <section>
+    <tr>
           <th>Date de début</th>
           <td>
             <input type="date" name="startDate" required>
           </td>
         </tr>
-
-        <tr>
+  </section>
+        
+  <section>
+    <tr>
           <th>Date de fin</th>
           <td>
             <input type="date" name="endDate" required>
@@ -63,6 +83,8 @@
       <button type="button">Annuler</button>
     </a>
   </form>
+  
+  </section>     
 
 </body>
 </html>

@@ -1,11 +1,9 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-// ===== LOGIN =====
-
 // Afficher le formulaire de login
 exports.showLoginForm = (req, res) => {
-  res.render('login', { error: null }); // on peut afficher les erreurs ici
+  res.render('login', { loginError: null, signupError: null });
 };
 
 // Connexion
@@ -13,14 +11,14 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
-      return res.render('login', { error: 'Identifiants incorrects' });
+      return res.render('login', { loginError: 'Identifiants incorrects', signupError: null });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.render('login', { error: 'Identifiants incorrects' });
+      return res.render('login', { loginError: 'Identifiants incorrects', signupError: null });
     }
 
     // Stocker les infos dans la session
@@ -31,7 +29,7 @@ exports.login = async (req, res) => {
     res.redirect('/dashboard');
   } catch (err) {
     console.error(err);
-    res.status(500).send('Erreur serveur');
+    res.render('login', { loginError: 'Erreur serveur', signupError: null });
   }
 };
 
@@ -42,11 +40,9 @@ exports.logout = (req, res) => {
   });
 };
 
-// ===== SIGNUP =====
-
 // Afficher le formulaire d’inscription
 exports.showSignupForm = (req, res) => {
-  res.render('signup', { error: null });
+  res.render('signup', { signupError: null, loginError: null });
 };
 
 // Créer un nouvel utilisateur
@@ -55,9 +51,9 @@ exports.createUser = async (req, res) => {
 
   try {
     // Vérifier si l'email existe déjà
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
-      return res.render('signup', { error: 'Un compte existe déjà avec cet email' });
+      return res.render('signup', { signupError: 'Un compte existe déjà avec cet email', loginError: null });
     }
 
     const user = new User({ username, email, password });
@@ -71,6 +67,6 @@ exports.createUser = async (req, res) => {
     res.redirect('/dashboard');
   } catch (err) {
     console.error(err);
-    res.status(500).send('Impossible de créer l’utilisateur');
+    res.render('signup', { signupError: 'Impossible de créer l’utilisateur', loginError: null });
   }
 };

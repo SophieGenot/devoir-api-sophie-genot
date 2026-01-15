@@ -7,8 +7,16 @@
 </head>
 
 <body>
+   <header class="header-hero">
+    <div class="header-overlay">
+      <h1>Port de Russell</h1>
+      <p>Bienvenue sur la page du port de Russell</p>
+    </div>
+  </header>
 
-  <h1>Modification d'une réservation</h1>
+<main>
+  <section>
+     <h1>Modification d'une réservation</h1>
 
   <form action="/reservations/<%= reservation._id %>/edit" method="POST">
     <table>
@@ -24,52 +32,56 @@
             >
           </td>
         </tr>
-
-        <tr>
+  </section>
+ 
+<section>
+  <tr>
           <th>Client</th>
           <td>
             <input
               type="text"
               name="clientName"
               value="<%= reservation.clientName %>"
-              required
-            >
+              required>
           </td>
         </tr>
-
-        <tr>
+</section>
+        
+<section>
+  <tr>
           <th>Bateau</th>
           <td>
             <input
               type="text"
               name="boatName"
               value="<%= reservation.boatName %>"
-              required
-            >
+              required>
           </td>
         </tr>
-
-        <tr>
+</section>
+        
+<section>
+  <tr>
           <th>Date de début</th>
           <td>
             <input
               type="date"
               name="startDate"
               value="<%= reservation.startDate.toISOString().slice(0,10) %>"
-              required
-            >
+              required>
           </td>
         </tr>
-
-        <tr>
+</section>
+        
+<section>
+   <tr>
           <th>Date de fin</th>
           <td>
             <input
               type="date"
               name="endDate"
               value="<%= reservation.endDate.toISOString().slice(0,10) %>"
-              required
-            >
+              required>
           </td>
         </tr>
       </tbody>
@@ -80,6 +92,8 @@
     <button type="button">Annuler</button>
     </a>
   </form>
-
+</section>
+</main>
+  
 </body>
 </html>

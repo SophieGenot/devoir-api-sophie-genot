@@ -4,12 +4,19 @@
   <meta charset="UTF-8">
   <title>Modifier un catway</title>
 
-  <!-- Feuille de style commune -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+   <header class="header-hero">
+    <div class="header-overlay">
+      <h1>Port de Russell</h1>
+      <p>Bienvenue sur la page du port de Russell</p>
+    </div>
+  </header>
 
-  <h1>Modification d'un catway</h1>
+  <main>
+    <section>
+      <h1>Modification d'un catway</h1>
 
   <form action="/catways/<%= catway._id %>/edit" method="POST">
     <table>
@@ -21,12 +28,13 @@
               type="number"
               name="catwayNumber"
               value="<%= catway.catwayNumber %>"
-              readonly
-            >
+              readonly>
           </td>
         </tr>
-
-        <tr>
+    </section>
+    
+    <section>
+      <tr>
           <th>Type de catway</th>
           <td>
             <select name="catwayType" required>
@@ -39,8 +47,10 @@
             </select>
           </td>
         </tr>
+    </section>
 
-        <tr>
+    <section>
+      <tr>
           <th>État du catway</th>
           <td>
             <input
@@ -53,12 +63,13 @@
         </tr>
       </tbody>
     </table>
-
+    </section>
+        
     <button type="submit"> Enregistrer</button>
     <a href="/dashboard">
       <button type="button"> Annuler</button>
     </a>
   </form>
-
+  </main>
 </body>
 </html>

@@ -4,24 +4,37 @@
   <meta charset="UTF-8">
   <title>Créer un catway</title>
 
-  <!-- Feuille de style commune -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-  <h1>Créer un nouveau catway</h1>
+ <header class="header-hero">
+    <div class="header-overlay">
+      <h1>Port de Russell</h1>
+      <p>Bienvenue sur la page du port de Russell</p>
+    </div>
+  </header>
 
+  <main>
+
+    <section>
+       <h1>Créer un nouveau catway</h1>
   <form action="/catways/new" method="POST">
     <table>
       <tbody>
         <tr>
-          <th>Numéro du catway</th>
+    </section>
+   
+    <section>
+      <th>Numéro du catway</th>
           <td>
             <input type="number" name="catwayNumber" required>
           </td>
         </tr>
-
-        <tr>
+    </section>
+          
+<section>
+  <tr>
           <th>Type de catway</th>
           <td>
             <select name="catwayType" required>
@@ -31,8 +44,10 @@
             </select>
           </td>
         </tr>
-
-        <tr>
+</section>
+        
+<section>
+  <tr>
           <th>État du catway</th>
           <td>
             <input type="text" name="catwayState" required>
@@ -40,12 +55,16 @@
         </tr>
       </tbody>
     </table>
-
+        
     <button type="submit">Créer le catway</button>
     <a href="/dashboard">
       <button type="button">Annuler</button>
     </a>
   </form>
 
+  </main>
+
+  </section>
+  
 </body>
 </html>

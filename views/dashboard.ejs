@@ -7,16 +7,27 @@
 </head>
 
 <body>
-  <h1>Bonjour <%= user.username %>, bienvenue sur le tableau de bord !</h1>
 
-  <h2>Mes informations</h2>
+  <header class="header-hero">
+    <div class="header-overlay">
+      <h1>Bonjour <%= user.username %>, bienvenue sur le tableau de bord !</h1>
+    </div>
+  </header>
+
+  <section>
+     <h2>Mes informations</h2>
   <p>Nom : <%= user.username %></p>
   <p>Email : <%= user.email %></p>
   <a href="/dashboard/user/edit"><button>Modifier mon profil</button></a>
   <form action="/dashboard/user/delete" method="POST" style="display:inline;">
     <button type="submit">Supprimer mon compte</button>
   </form>
-
+  <form action="/logout" method="GET" style="display:inline;">
+  <button type="submit">Se déconnecter</button>
+</form>
+  </section>
+ 
+  <section>
   <h2>Mes réservations</h2>
   <a href="/reservations/new"><button>Créer une nouvelle réservation</button></a>
   <table>
@@ -48,8 +59,10 @@
       <% }) %>
     </tbody>
   </table>
-
-  <h2>Catways</h2>
+  </section>
+  
+  <section>
+     <h2>Catways</h2>
   <a href="/catways/new"><button>Créer un nouveau catway</button></a>
   <table>
     <thead>
@@ -76,5 +89,7 @@
       <% }) %>
     </tbody>
   </table>
+  </section>
+ 
 </body>
 </html>
