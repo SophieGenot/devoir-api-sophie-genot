@@ -1,4 +1,4 @@
-const session = require('express-session'); 
+const session = require('express-session');  
 const MongoStore = require('connect-mongo').default;
 const express = require('express');
 require('dotenv').config({
@@ -46,17 +46,7 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-<<<<<<< HEAD
 // Server
-=======
-const catwaysRoute = require('./routes/catways');
-const reservationsRoute = require('./routes/reservations');
-
-app.use('/catways', catwaysRoute);
-app.use('/reservations', reservationsRoute); 
-
-// Lancement du serveur
->>>>>>> cfd1731 (catways-reservations routes)
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur le port ${PORT}`);
 });
