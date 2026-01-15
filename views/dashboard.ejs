@@ -9,80 +9,72 @@
 <body>
   <h1>Bonjour <%= username %>, bienvenue sur le tableau de bord !</h1>
 
-<h2>Mes réservations</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Catway</th>
-            <th>Client</th>
-            <th>Bateau</th>
-            <th>Début</th>
-            <th>Fin</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% reservations.forEach(reservation => { %>
-        <tr>
-            <td><%= reservation.catwayNumber %></td>
-            <td><%= reservation.clientName %></td>
-            <td><%= reservation.boatName %></td>
-            <td><%= reservation.startDate.toISOString().slice(0, 10) %></td>
-            <td><%= reservation.endDate.toISOString().slice(0, 10) %></td>
-            <td>
-              <a href="/reservations/<%= reservation._id %>/edit">
-                <button type="button">Modifier</button>
-              </a>
-                
-              <form action="/reservations/<%= reservation._id %>/delete" method="POST" style="display:inline;">
-                <button type="submit">Supprimer</button>
-              </form>
+  <h2>Mes informations</h2>
+  <p>Nom : <%= user.username %></p>
+  <p>Email : <%= user.email %></p>
+  <a href="/dashboard/user/edit"><button>Modifier mon profil</button></a>
+  <form action="/dashboard/user/delete" method="POST" style="display:inline;">
+    <button type="submit">Supprimer mon compte</button>
+  </form>
 
-              <a href="/reservations/new">
-                <button type="button">Créer une nouvelle réservation</button>
-              </a>   
-            </td>
-        </tr>
-        <% }) %>
-    </tbody>
-</table>
-
-  <h2>Catways</h2>
+  <h2>Mes réservations</h2>
+  <a href="/reservations/new"><button>Créer une nouvelle réservation</button></a>
   <table>
     <thead>
-       <tr>
-      <th>Numéro</th>
-      <th>Type</th>
-      <th>Etat</th>
-      <th>Actions</th>
-    </tr>
+      <tr>
+        <th>Catway</th>
+        <th>Client</th>
+        <th>Bateau</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Actions</th>
+      </tr>
     </thead>
-   <tbody>
-     <% catways.forEach(c => { %>
+    <tbody>
+      <% reservations.forEach(reservation => { %>
+      <tr>
+        <td><%= reservation.catwayNumber %></td>
+        <td><%= reservation.clientName %></td>
+        <td><%= reservation.boatName %></td>
+        <td><%= reservation.startDate.toISOString().slice(0, 10) %></td>
+        <td><%= reservation.endDate.toISOString().slice(0, 10) %></td>
+        <td>
+          <a href="/reservations/<%= reservation._id %>/edit"><button>Modifier</button></a>
+          <form action="/reservations/<%= reservation._id %>/delete" method="POST" style="display:inline;">
+            <button type="submit">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <h2>Catways</h2>
+  <a href="/catways/new"><button>Créer un nouveau catway</button></a>
+  <table>
+    <thead>
+      <tr>
+        <th>Numéro</th>
+        <th>Type</th>
+        <th>Etat</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% catways.forEach(c => { %>
       <tr>
         <td><%= c.catwayNumber %></td>
         <td><%= c.catwayType %></td>
         <td><%= c.catwayState %></td>
-        <td>   
-          <a href="/catways/<%= c._id %>/edit">
-            <button type="button">Modifier</button>
-          </a>
-
+        <td>
+          <a href="/catways/<%= c._id %>/edit"><button>Modifier</button></a>
           <form action="/catways/<%= c._id %>/delete" method="POST" style="display:inline;">
             <button type="submit">Supprimer</button>
           </form>
-
-          <a href="/catways/new">
-            <button type="button">Créer un nouveau catway</button>
-          </a>
         </td>
       </tr>
-    <% }) %>
-   </tbody>
+      <% }) %>
+    </tbody>
   </table>
-
-
- 
 </body>
 </html>
-
