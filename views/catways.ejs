@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des Catways</title>
+  <style>
+    table { border-collapse: collapse; width: 80%; margin: 20px auto; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f4f4f4; }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">Catways</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Numéro</th>
+        <th>Type</th>
+        <th>État</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% catways.forEach(catway => { %>
+        <tr>
+          <td><%= catway.catwayNumber %></td>
+          <td><%= catway.catwayType %></td>
+          <td><%= catway.catwayState %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -40,12 +40,35 @@ app.use('/dashboard', require('./routes/dashboard.routes'));
 app.use('/catways', require('./routes/catways'));
 app.use('/reservations', require('./routes/reservations'));
 
-// Home
-app.get('/', (req, res) => {
-  res.send('Hello World');
+// Modèles pour les routes directes
+const Catway = require('./models/Catways');
+const Reservation = require('./models/Reservation');
+
+// Routes directes pour affichage EJS (version dashboard-crud)
+app.get('/catways', async (req, res) => {
+  try {
+    const catways = await Catway.find().sort({ catwayNumber: 1 }); // Tri par numéro
+    res.render('catways', { catways }); // On envoie les données à la vue EJS
+  } catch (err) {
+    res.status(500).send('Erreur serveur');
+  }
 });
 
-// Server
+app.get('/reservations', async (req, res) => {
+  try {
+    const reservations = await Reservation.find().sort({ startDate: 1 }); // tri par date
+    res.render('reservations', { reservations });
+  } catch (err) {
+    res.status(500).send('Erreur serveur');
+  }
+});
+
+// Home
+app.get('/', (req, res) => {
+  res.render('home'); // remplacer le 'Hello World' par la page d'accueil
+});
+
+// Lancement du serveur
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur le port ${PORT}`);
 });
