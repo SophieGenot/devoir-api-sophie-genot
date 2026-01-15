@@ -9,7 +9,7 @@ async function createUser() {
     const user = new User({
       username: 'Sophie',
       email: 'sophie@test.com',
-      password: 'test123' // 🔴 EN CLAIR
+      password: 'test123'
     });
 
     await user.save();

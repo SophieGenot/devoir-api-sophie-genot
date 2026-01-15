@@ -3,29 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="/css/style.css">
-  <title>Connexion</title>
+  <title>Inscription</title>
 </head>
 <body>
-  <h1>Port de Russell – Connexion / Inscription</h1>
-  <section>
-    <h2>Se connecter</h2>
-    <% if (loginError) { %>
-      <p style="color :red;"><%= loginError %></p>
-    <% } %>
-    <form action="/login" method="POST">
-      <label>Email:</label>
-      <input type="email" name="email" required>
-      <br>
-      <label>Mot de passe:</label>
-      <input type="password" name="password" required>
-      <br>
-      <button type="submit">Se connecter</button>
-    </form>
-  </section>
-
-  <hr>
-
-  <!-- Formulaire Signup -->
+  
   <section>
     <h2>Créer un compte</h2>
     <% if (signupError) { %>
