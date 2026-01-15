@@ -25,7 +25,10 @@ router.get('/', isAuthenticated, async (req, res) => {
     }).sort({ startDate: 1 });
 
     res.render('dashboard', {
+      user: {
       username: req.session.username,
+      email: req.session.email,
+      },
       catways,
       reservations
     });
