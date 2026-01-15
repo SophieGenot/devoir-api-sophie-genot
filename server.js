@@ -7,6 +7,10 @@ require('dotenv').config({
     : 'env/.env.dev'
 });
 
+// Routes API
+const apiCatways = require('./routes/api.route.cat');
+const apiReservations = require('./routes/api.route.resa');
+
 const connectDB = require('./config/db');
 
 // App
@@ -40,6 +44,10 @@ app.use('/dashboard', require('./routes/dashboard.routes'));
 app.use('/catways', require('./routes/catways'));
 app.use('/reservations', require('./routes/reservations'));
 app.use(express.static('public'));
+
+// Routes API
+app.use('/api/catways', apiCatways);
+app.use('/api/reservations', apiReservations);
 
 // Home
 app.get('/', (req, res) => {
