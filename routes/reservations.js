@@ -80,7 +80,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// DELETE réservation par ID
+// suppr réservation par ID
 router.post('/:id/delete', async (req, res) => {
   try {
     await Reservation.findByIdAndDelete(req.params.id);
