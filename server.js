@@ -44,9 +44,9 @@ app.use((req, res, next) => {
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-// Middlewares
-app.use(express.urlencoded({ extended: true })); // formulaires
-app.use(express.json()); // JSON
+// Middlewares pour parser les formulaires et le JSON
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
 app.use(express.static('public')); 
 
 // ===== ROUTES =====
@@ -55,11 +55,11 @@ app.use('/dashboard', dashboardRoutes);
 app.use('/catways', catwaysRoutes);
 app.use('/reservations', reservationsRoutes);
 
-// Routes API
+// Routes API JSON
 app.use('/api/catways', apiCatways);
 app.use('/api/reservations', apiReservations);
 
-// Home page 
+// Page d'accueil
 app.get('/home', (req, res) => {
   res.render('home');
 });
