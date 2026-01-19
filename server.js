@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express'); 
 const session = require('express-session');
 const MongoStore = require('connect-mongo').default;
 require('dotenv').config({
@@ -8,12 +8,11 @@ require('dotenv').config({
 });
 
 const connectDB = require('./config/db');
-
 // Routes
-const authRoutes = require('./routes/auth.routes');
-const dashboardRoutes = require('./routes/dashboard.routes');
-const catwaysRoutes = require('./routes/catways');
-const reservationsRoutes = require('./routes/reservations');
+const authRoutes = require('./routes/auth.route');
+const dashboardRoutes = require('./routes/dashboard.route');
+const catwaysRoutes = require('./routes/catways.route');
+const reservationsRoutes = require('./routes/reservations.route');
 const apiCatways = require('./routes/api.route.cat');
 const apiReservations = require('./routes/api.route.resa');
 
@@ -46,8 +45,9 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // Middlewares
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public')); // CSS, images, JS
+app.use(express.urlencoded({ extended: true })); // formulaires
+app.use(express.json()); // JSON
+app.use(express.static('public')); 
 
 // ===== ROUTES =====
 app.use('/', authRoutes);
@@ -59,8 +59,8 @@ app.use('/reservations', reservationsRoutes);
 app.use('/api/catways', apiCatways);
 app.use('/api/reservations', apiReservations);
 
-// Home page
-app.get('/', (req, res) => {
+// Home page 
+app.get('/home', (req, res) => {
   res.render('home');
 });
 
