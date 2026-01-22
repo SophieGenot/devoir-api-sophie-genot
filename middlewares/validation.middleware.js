@@ -40,6 +40,12 @@ exports.validateReservation = [
   body('boatName').notEmpty().withMessage('Nom du bateau requis'),
   body('startDate').notEmpty().withMessage('Date de début requise'),
   body('endDate').notEmpty().withMessage('Date de fin requise'),
+  body('endDate').custom((endDate, { req }) => {
+    if (new Date(endDate) <= new Date(req.body.startDate)) {
+      throw new Error('La date de fin doit être après la date de début');
+    }
+    return true;
+  }),
   exports.handleValidationErrors
 ];
 
