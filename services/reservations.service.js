@@ -20,3 +20,10 @@ exports.updateReservation = async (id, data) => {
 exports.deleteReservation = async (id) => {
   return Reservation.findByIdAndDelete(id);
 };
+
+// --- Liste des bateaux pour les réservations
+exports.getAllBoats = async () => {
+  const boats = await Reservation.distinct('boatName');
+  // Renvoie un tableau d'objets { name: '...' } pour le template
+  return boats.map(name => ({ name }));
+};

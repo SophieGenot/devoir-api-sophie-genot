@@ -26,9 +26,19 @@
       <tbody>
         <tr>
           <th>Numéro du catway</th>
-          <td>
-            <input type="number" name="catwayNumber" required>
-          </td>
+         <td>
+              <input
+                type="number"
+                name="catwayNumber"
+                min="1"
+                max="24"
+                value="<%= reservation.catwayNumber || '' %>"
+                required
+              >
+              <% if (errors && errors.catwayNumber) { %>
+                <div class="error-message"><%= errors.catwayNumber %></div>
+              <% } %>
+            </td>
         </tr>
   </section>
  
@@ -54,28 +64,59 @@
     <tr>
           <th>Nom du bateau</th>
           <td>
-            <input type="text" name="boatName" required>
-          </td>
-        </tr>
+             <select name="boatName" required>
+      <option value="">-- Sélectionner un bateau --</option>
+      <% boats.forEach(boat => { %>
+        <option value="<%= boat.name %>" 
+          <%= reservation.boatName === boat.name ? 'selected' : '' %>>
+          <%= boat.name %>
+        </option>
+      <% }) %>
+    </select>
+    <% if (errors.boatName) { %>
+      <div class="error"><%= errors.boatName %></div>
+    <% } %>
+     </td>
+ 
+    </tr>
   </section>
         
   <section>
-    <tr>
-          <th>Date de début</th>
-          <td>
-            <input type="date" name="startDate" required>
-          </td>
-        </tr>
+    <!-- Start Date -->
+          <tr>
+            <th>Date de début</th>
+            <td>
+              <input
+                type="date"
+                id="startDate"
+                name="startDate"
+                value="<%= reservation.startDate || '' %>"
+                required
+              >
+              <% if (errors && errors.startDate) { %>
+                <div class="error-message"><%= errors.startDate %></div>
+              <% } %>
+            </td>
+          </tr>
+
+          <!-- End Date -->
+          <tr>
+            <th>Date de fin</th>
+            <td>
+              <input
+                type="date"
+                id="endDate"
+                name="endDate"
+                value="<%= reservation.endDate || '' %>"
+                required
+              >
+              <% if (errors && errors.endDate) { %>
+                <div class="error-message"><%= errors.endDate %></div>
+              <% } %>
+            </td>
+          </tr>
   </section>
-        
-  <section>
-    <tr>
-          <th>Date de fin</th>
-          <td>
-            <input type="date" name="endDate" required>
-          </td>
-        </tr>
-      </tbody>
+    </tbody>
     </table>
 
     <button type="submit">Créer la réservation</button>

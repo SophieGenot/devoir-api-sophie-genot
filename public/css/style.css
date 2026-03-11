@@ -30,7 +30,7 @@ a {
 
 .header-hero {
   height: 50vh; 
-  background-image: url('../portR.jpg'); 
+  background-image: url('../img/portR.jpg'); 
   background-size: cover;
   background-position: center;
   position: relative;

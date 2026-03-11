@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const reservationController = require('../controllers/reservations.controller');
 const { isAuthenticated } = require('../middlewares/auth.middleware');
-const { validateReservation } = require('../middlewares/validation.middleware');
+const { validateReservation, handleReservationValidationErrors } = require('../middlewares/validation.middleware');
 
 // Liste des réservations de l'utilisateur
 router.get('/', isAuthenticated, reservationController.listReservations);

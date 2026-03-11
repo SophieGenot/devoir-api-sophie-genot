@@ -43,8 +43,9 @@ exports.listReservations = async (req, res) => {
  */
 
 // Formulaire création nouvelle réservation
-exports.showCreateForm = (req, res) => {
-  res.render('newReservation');
+exports.showCreateForm = async (req, res) => {
+  const boats = await reservationService.getAllBoats();
+  res.render('newReservation', { reservation: {}, boats, errors: {} });
 };
 
 /**
@@ -101,10 +102,11 @@ exports.showEditForm = async (req, res) => {
       req.params.id,
       req.session.email
     );
-    if (!reservation) {
-      return res.status(404).send('Réservation non trouvée');
-    }
-    res.render('editReservations', { reservation });
+    if (!reservation) return res.status(404).send('Réservation non trouvée');
+
+    const boats = await reservationService.getAllBoats();
+
+    res.render('editReservations', { reservation, boats, errors: {} });
   } catch (error) {
     res.status(500).send('Erreur serveur');
   }
